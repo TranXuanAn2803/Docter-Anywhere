@@ -21,28 +21,4 @@ public class DemoController {
         return ResponseEntity.ok("Hello from secured endpoint");
     }
 
-    @RestController
-    @RequestMapping("/api/auth")
-    @RequiredArgsConstructor
-    public static class AuthenticationController {
-        @Autowired
-        private final AuthenticationService service;
-        @PostMapping("/register")
-        public ResponseEntity<AuthenticationResponse> register(@RequestBody RegistererRequest request) {
-
-            try {
-                return ResponseEntity.ok(service.register(request));
-            }
-            catch (Exception e)
-            {
-                return new ResponseEntity(e.getMessage(), HttpStatus.FORBIDDEN);
-            }
-        }
-        @PostMapping("/authenticate")
-        public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request)
-        {
-            return ResponseEntity.ok(service.authenticate(request));
-        }
-
-    }
 }
